@@ -1,0 +1,10 @@
+
+
+group = 'com.sunnymonster'
+version = '1.0.0'
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}

@@ -1,0 +1,7 @@
+
+rootProject.name = 'LWJGL-Abstraction-Library'
+
+
+include(':LibraryTester')
+include(':Library')
+

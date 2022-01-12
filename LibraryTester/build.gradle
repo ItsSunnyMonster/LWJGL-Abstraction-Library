@@ -1,0 +1,24 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'application'
+}
+
+group = 'com.sunnymonster'
+version = '1.0.0'
+
+dependencies {
+    implementation project(':Library')
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '16'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '16'
+}
+
+application {
+    mainClass.set('com.sunnymonster.lwjgllib.tester.MainKt')
+}
