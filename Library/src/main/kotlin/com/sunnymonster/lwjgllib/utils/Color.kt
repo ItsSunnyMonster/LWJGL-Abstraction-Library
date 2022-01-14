@@ -1,5 +1,6 @@
 package com.sunnymonster.lwjgllib.utils
 
+import org.joml.Vector3f
 import org.joml.Vector3i
 import org.joml.Vector4f
 import org.joml.Vector4i
@@ -25,6 +26,13 @@ class Color {
         this.alpha = alpha
     }
 
+    constructor(red : Float, green : Float, blue : Float, alpha : Float = 1.0f) {
+        this.red = (red * 255).toInt()
+        this.green = (green * 255).toInt()
+        this.blue = (blue * 255).toInt()
+        this.alpha = (alpha * 255).toInt()
+    }
+
     constructor(rgb : Vector4i) {
         red = rgb.x
         green = rgb.y
@@ -37,6 +45,20 @@ class Color {
         green = rgb.y
         blue = rgb.z
         alpha = 255
+    }
+
+    constructor(rgb : Vector3f) {
+        red = (rgb.x * 255).toInt()
+        green = (rgb.y * 255).toInt()
+        blue = (rgb.z * 255).toInt()
+        alpha = 255
+    }
+
+    constructor(rgb : Vector4f) {
+        red = (rgb.x * 255).toInt()
+        green = (rgb.y * 255).toInt()
+        blue = (rgb.z * 255).toInt()
+        alpha = (rgb.w * 255).toInt()
     }
 
     fun r() : Int {
