@@ -11,6 +11,12 @@ import org.lwjgl.opengl.GLDebugMessageCallback
 import org.lwjgl.opengl.GLDebugMessageCallbackI
 import org.lwjgl.system.MemoryUtil.NULL
 
+/**
+ * Created on 13/01/2022
+ * @author SunnyMonster
+ * @param props Window properties
+ * @constructor Creates a new GLFW window
+ */
 class Window
     (props: WindowProps) {
     private val handle : Long
@@ -89,6 +95,10 @@ class Window
         windows.add(this)
     }
 
+    /**
+     * Updates the current window and destroys it if it is closed
+     * @param iterator The iterator of the current window. Used to remove the Window from the list
+     */
     fun update(iterator: MutableIterator<Window>) {
         if (!active)
             return
@@ -100,23 +110,36 @@ class Window
         }
     }
 
+    /**
+     * Getter for the window's handle
+     * @return The window's handle
+     */
     fun handle() : Long {
         return handle
     }
 
+    /**
+     * Getter for the window's renderer
+     * @return The window's renderer
+     */
     fun renderer() : Renderer {
         return renderer
     }
-
     companion object {
         @JvmStatic
         private var windows : MutableList<Window> = ArrayList()
 
+        /**
+         * Wrapper for the glfwPollEvents function
+         */
         @JvmStatic
         fun pollEvents() {
             glfwPollEvents()
         }
 
+        /**
+         * Updates all windows
+         */
         @JvmStatic
         fun updateAll() {
             val it = windows.iterator()
@@ -126,6 +149,10 @@ class Window
             pollEvents()
         }
 
+        /**
+         * Returns the number of currently active windows
+         * @return The number of active windows
+         */
         @JvmStatic
         fun windowCount() : Int {
             return windows.size

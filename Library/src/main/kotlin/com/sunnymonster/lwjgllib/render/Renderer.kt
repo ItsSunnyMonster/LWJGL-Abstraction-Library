@@ -10,6 +10,12 @@ import org.joml.Vector4i
 import org.lwjgl.glfw.GLFW.glfwMakeContextCurrent
 import org.lwjgl.opengl.GL11.*
 
+/**
+ * Created on 13/01/2022
+ * @author SunnyMonster
+ * @constructor Creates a new Renderer
+ * @param window The window to render to
+ */
 class Renderer(window : Window) {
     private val window : Window
     private var clearColor : Color = Color.BLACK
@@ -21,11 +27,20 @@ class Renderer(window : Window) {
         glClearColor(normalizedClearColor.x, normalizedClearColor.y, normalizedClearColor.z, normalizedClearColor.w)
     }
 
+    /**
+     * Clears the screen
+     */
     fun clear() {
         glfwMakeContextCurrent(window.handle())
         glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
     }
 
+    /**
+     * Renders the given VertexArray
+     * @param vertexArray The VertexArray to render
+     * @param shader The shader to use
+     * @param indexBuffer The index buffer to use
+     */
     fun render(vertexArray: VertexArray, indexBuffer: IndexBuffer, shader: Shader) {
         glfwMakeContextCurrent(window.handle())
         vertexArray.bind()
@@ -37,6 +52,10 @@ class Renderer(window : Window) {
         shader.unbind()
     }
 
+    /**
+     * Sets the clear color
+     * @param color The color to set
+     */
     fun setClearColor(color : Color) {
         clearColor = color
         normalizedClearColor = color.normalize()

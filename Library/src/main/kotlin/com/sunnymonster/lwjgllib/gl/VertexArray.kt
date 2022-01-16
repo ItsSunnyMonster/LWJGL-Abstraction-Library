@@ -3,6 +3,11 @@ package com.sunnymonster.lwjgllib.gl
 import com.sunnymonster.lwjgllib.gl.buffer.VertexBuffer
 import org.lwjgl.opengl.GL30.*
 
+/**
+ * Created on 13/01/2022
+ * @author SunnyMonster
+ * @constructor Creates a new VertexArray
+ */
 class VertexArray : AutoCloseable {
     @Suppress("JoinDeclarationAndAssignment")
     private val id : Int
@@ -13,14 +18,24 @@ class VertexArray : AutoCloseable {
         id = glGenVertexArrays()
     }
 
+    /**
+     * Binds the VertexArray
+     */
     fun bind() {
         glBindVertexArray(id)
     }
 
+    /**
+     * Unbinds the VertexArray
+     */
     fun unbind() {
         glBindVertexArray(0)
     }
 
+    /**
+     * Adds a VertexBuffer to the VertexArray
+     * @param buffer The VertexBuffer to add
+     */
     fun addBuffer(buffer : VertexBuffer) {
         bind()
         buffer.bind()
@@ -31,6 +46,9 @@ class VertexArray : AutoCloseable {
         buffer.unbind()
     }
 
+    /**
+     * Deletes the VertexArray
+     */
     override fun close() {
         glDeleteVertexArrays(id)
     }

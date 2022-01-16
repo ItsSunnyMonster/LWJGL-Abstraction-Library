@@ -6,6 +6,13 @@ import org.lwjgl.opengl.GL20.*
 import java.io.File
 import java.net.URL
 
+/**
+ * Created on 14/01/2022
+ * @author SunnyMonster
+ * @constructor Creates a new shader program from the given vertex and fragment shader source files.
+ * @param vertexShaderPath The path to the vertex shader source file.
+ * @param fragmentShaderPath The path to the fragment shader source file.
+ */
 open class Shader(vertexShaderPath : String, fragmentShaderPath : String) : AutoCloseable {
     private val id : Int
 
@@ -33,40 +40,74 @@ open class Shader(vertexShaderPath : String, fragmentShaderPath : String) : Auto
         glDeleteShader(fragmentShader)
     }
 
+    /**
+     * Binds the shader program
+     */
     fun bind() {
         glUseProgram(id)
     }
 
+    /**
+     * Unbinds the shader program
+     */
     fun unbind() {
         glUseProgram(0)
     }
 
+    /**
+     * Sets the value of a uniform variable in the shader program.
+     * @param name The name of the uniform variable.
+     * @param value The value to set.
+     */
     fun setBool(name : String, value : Boolean) {
         bind()
         glUniform1i(glGetUniformLocation(id, name), if (value) 1 else 0)
     }
 
+    /**
+     * Sets the value of a uniform variable in the shader program.
+     * @param name The name of the uniform variable.
+     * @param value The value to set.
+     */
     fun setInt(name : String, value : Int) {
         bind()
         glUniform1i(glGetUniformLocation(id, name), value)
     }
 
+    /**
+     * Sets the value of a uniform variable in the shader program.
+     * @param name The name of the uniform variable.
+     * @param value The value to set.
+     */
     fun setFloat(name : String, value : Float) {
         bind()
         glUniform1f(glGetUniformLocation(id, name), value)
     }
 
+    /**
+     * Sets the value of a uniform variable in the shader program.
+     * @param name The name of the uniform variable.
+     * @param value The value to set.
+     */
     fun setVec4(name : String, value : Vector4f) {
         bind()
         glUniform4f(glGetUniformLocation(id, name), value.x, value.y, value.z, value.w)
     }
 
+    /**
+     * Sets the value of a uniform variable in the shader program.
+     * @param name The name of the uniform variable.
+     * @param value The value to set.
+     */
     fun setCol(name : String, value : Color) {
         bind()
         val normalized = value.normalize()
         glUniform4f(glGetUniformLocation(id, name), normalized.x, normalized.y, normalized.z, normalized.w)
     }
 
+    /**
+     * Deletes the program
+     */
     override fun close() {
         glDeleteProgram(id)
     }
