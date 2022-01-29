@@ -4,6 +4,7 @@ import com.sunnymonster.lwjgllib.core.Window
 import com.sunnymonster.lwjgllib.gl.VertexArray
 import com.sunnymonster.lwjgllib.gl.buffer.IndexBuffer
 import com.sunnymonster.lwjgllib.gl.shader.Shader
+import com.sunnymonster.lwjgllib.model.RawModel
 import com.sunnymonster.lwjgllib.utils.Color
 import org.joml.Vector4f
 import org.joml.Vector4i
@@ -50,6 +51,17 @@ class Renderer(window : Window) {
         indexBuffer.unbind()
         vertexArray.unbind()
         shader.unbind()
+    }
+
+    /**
+     * Renders the given raw model
+     * @param rawModel The raw model to render
+     */
+    fun render(rawModel : RawModel) {
+        glfwMakeContextCurrent(window.handle())
+        rawModel.bind()
+        glDrawElements(GL_TRIANGLES, rawModel.indexBuffer().count(), GL_UNSIGNED_INT, 0)
+        rawModel.unbind()
     }
 
     /**

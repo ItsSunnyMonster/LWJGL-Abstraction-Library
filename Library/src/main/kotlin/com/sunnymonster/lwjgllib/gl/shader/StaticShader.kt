@@ -1,9 +1,12 @@
 package com.sunnymonster.lwjgllib.gl.shader
 
+import com.sunnymonster.lwjgllib.utils.Consts
+
 /**
  * Created on 14/01/2022
  * @author SunnyMonster
  */
-class StaticShader : Shader("/com/sunnymonster/lwjgllib/shadersource/static.vert", "/com/sunnymonster/lwjgllib/shadersource/static.frag") {
-
-}
+class StaticShader :
+    Shader(
+        Consts.SHADER_SOURCE_ROOT + "static/static.vert",
+        Consts.SHADER_SOURCE_ROOT + "static/static.frag")

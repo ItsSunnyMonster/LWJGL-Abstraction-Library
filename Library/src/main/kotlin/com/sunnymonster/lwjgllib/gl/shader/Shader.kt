@@ -14,6 +14,7 @@ import java.net.URL
  * @param fragmentShaderPath The path to the fragment shader source file.
  */
 open class Shader(vertexShaderPath : String, fragmentShaderPath : String) : AutoCloseable {
+
     private val id : Int
 
     init {

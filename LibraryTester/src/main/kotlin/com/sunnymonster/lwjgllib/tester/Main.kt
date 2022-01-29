@@ -6,6 +6,7 @@ import com.sunnymonster.lwjgllib.gl.VertexArray
 import com.sunnymonster.lwjgllib.gl.buffer.IndexBuffer
 import com.sunnymonster.lwjgllib.gl.buffer.VertexBuffer
 import com.sunnymonster.lwjgllib.gl.shader.StaticShader
+import com.sunnymonster.lwjgllib.model.RawModel
 import com.sunnymonster.lwjgllib.utils.Color
 import org.joml.Vector4f
 import org.lwjgl.Version
@@ -22,33 +23,24 @@ fun main() {
     renderer.setClearColor(Color("#00a2ed")) // This is Windows blue
 
     val positions : FloatArray = floatArrayOf(
-        0.0f, 0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f
+        -0.5f,  0.5f, 0.0f, // Top left     0
+         0.5f,  0.5f, 0.0f, // Top right    1
+         0.5f, -0.5f, 0.0f, // Bottom right 2
+        -0.5f, -0.5f, 0.0f  // Bottom left  3
     )
 
     val indices : IntArray = intArrayOf(
-        0, 1, 2
+        3, 2, 1,
+        0, 3, 1
     )
 
-    val positionVbo = VertexBuffer(positions, 3)
-    val ibo = IndexBuffer(indices)
-    val vao = VertexArray()
-    vao.addBuffer(positionVbo)
-    positionVbo.close()
+    val rawModel = RawModel(positions, indices)
 
-    val shader = StaticShader()
-
-    var red : Float = 0.0f
     while (Window.windowCount() > 0) {
-        red = sin(glfwGetTime().toFloat()) / 2f + 0.5f
-        shader.setVec4("u_color", Vector4f(red, 0.0f, 0.0f, 1.0f))
         renderer.clear()
-        renderer.render(vao, ibo, shader)
+        renderer.render(rawModel)
         Window.updateAll()
     }
 
-    vao.close()
-    ibo.close()
-    shader.close()
+    rawModel.close()
 }
