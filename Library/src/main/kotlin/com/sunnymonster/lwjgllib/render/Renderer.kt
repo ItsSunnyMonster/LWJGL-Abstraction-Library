@@ -5,9 +5,9 @@ import com.sunnymonster.lwjgllib.gl.VertexArray
 import com.sunnymonster.lwjgllib.gl.buffer.IndexBuffer
 import com.sunnymonster.lwjgllib.gl.shader.Shader
 import com.sunnymonster.lwjgllib.model.RawModel
+import com.sunnymonster.lwjgllib.model.TexturedModel
 import com.sunnymonster.lwjgllib.utils.Color
 import org.joml.Vector4f
-import org.joml.Vector4i
 import org.lwjgl.glfw.GLFW.glfwMakeContextCurrent
 import org.lwjgl.opengl.GL11.*
 
@@ -57,11 +57,26 @@ class Renderer(window : Window) {
      * Renders the given raw model
      * @param rawModel The raw model to render
      */
-    fun render(rawModel : RawModel) {
+    fun render(rawModel : RawModel, shader : Shader) {
         glfwMakeContextCurrent(window.handle())
         rawModel.bind()
+        shader.bind()
         glDrawElements(GL_TRIANGLES, rawModel.indexBuffer().count(), GL_UNSIGNED_INT, 0)
         rawModel.unbind()
+        shader.unbind()
+    }
+
+    /**
+     * Renders the given textured model
+     * @param texturedModel The raw model to render
+     */
+    fun render(texturedModel: TexturedModel, shader : Shader) {
+        glfwMakeContextCurrent(window.handle())
+        texturedModel.bind()
+        shader.bind()
+        glDrawElements(GL_TRIANGLES, texturedModel.rawModel().indexBuffer().count(), GL_UNSIGNED_INT, 0)
+        texturedModel.unbind()
+        shader.unbind()
     }
 
     /**

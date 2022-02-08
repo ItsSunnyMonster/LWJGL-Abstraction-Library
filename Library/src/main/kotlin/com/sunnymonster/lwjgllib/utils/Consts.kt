@@ -5,8 +5,12 @@ class Consts {
         @JvmStatic
         val ROOT = "/"
         @JvmStatic
-        val PACKAGE_ROOT = ROOT + "com/sunnymonster/lwjgllib/"
+        val PACKAGE_ROOT = "${ROOT}com/sunnymonster/lwjgllib/"
         @JvmStatic
-        val SHADER_SOURCE_ROOT = PACKAGE_ROOT + "shadersource/"
+        val ASSETS_ROOT = "${PACKAGE_ROOT}assets/"
+        @JvmStatic
+        val SHADER_SOURCE_ROOT = "${ASSETS_ROOT}shadersource/"
+        @JvmStatic
+        val TEXTURE_ROOT = "${ASSETS_ROOT}textures/"
     }
 }

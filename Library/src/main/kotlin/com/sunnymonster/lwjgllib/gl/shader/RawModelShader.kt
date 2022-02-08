@@ -8,5 +8,5 @@ import com.sunnymonster.lwjgllib.utils.Consts
  */
 class RawModelShader :
     Shader(
-        Consts.SHADER_SOURCE_ROOT + "rawmodel/rawmodel.vert",
-        Consts.SHADER_SOURCE_ROOT + "rawmodel/rawmodel.frag")
+        "${Consts.SHADER_SOURCE_ROOT}rawmodel/rawmodel.vert",
+        "${Consts.SHADER_SOURCE_ROOT}rawmodel/rawmodel.frag")

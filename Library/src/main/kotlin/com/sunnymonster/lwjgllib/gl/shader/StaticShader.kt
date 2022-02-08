@@ -8,5 +8,5 @@ import com.sunnymonster.lwjgllib.utils.Consts
  */
 class StaticShader :
     Shader(
-        Consts.SHADER_SOURCE_ROOT + "static/static.vert",
-        Consts.SHADER_SOURCE_ROOT + "static/static.frag")
+        "${Consts.SHADER_SOURCE_ROOT}static/static.vert",
+        "${Consts.SHADER_SOURCE_ROOT}static/static.frag")

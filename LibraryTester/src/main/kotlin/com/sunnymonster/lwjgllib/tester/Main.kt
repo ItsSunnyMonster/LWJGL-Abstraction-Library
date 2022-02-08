@@ -2,16 +2,12 @@ package com.sunnymonster.lwjgllib.tester
 
 import com.sunnymonster.lwjgllib.core.Window
 import com.sunnymonster.lwjgllib.core.WindowProps
-import com.sunnymonster.lwjgllib.gl.VertexArray
-import com.sunnymonster.lwjgllib.gl.buffer.IndexBuffer
-import com.sunnymonster.lwjgllib.gl.buffer.VertexBuffer
-import com.sunnymonster.lwjgllib.gl.shader.StaticShader
+import com.sunnymonster.lwjgllib.gl.shader.TexturedModelShader
 import com.sunnymonster.lwjgllib.model.RawModel
+import com.sunnymonster.lwjgllib.model.TexturedModel
 import com.sunnymonster.lwjgllib.utils.Color
-import org.joml.Vector4f
+import com.sunnymonster.lwjgllib.utils.Consts
 import org.lwjgl.Version
-import org.lwjgl.glfw.GLFW.glfwGetTime
-import kotlin.math.sin
 
 fun main() {
     println("LWJGL Version: ${Version.getVersion()}")
@@ -34,13 +30,23 @@ fun main() {
         0, 3, 1
     )
 
+    val texCoords : FloatArray = floatArrayOf(
+        0f, 1f,
+        1f, 1f,
+        1f, 0f,
+        0f, 0f
+    )
+
     val rawModel = RawModel(positions, indices)
+    val texturedModel = TexturedModel("${Consts.TEXTURE_ROOT}panda.jpg", false, rawModel, texCoords)
+    val shader = TexturedModelShader()
 
     while (Window.windowCount() > 0) {
         renderer.clear()
-        renderer.render(rawModel)
+        renderer.render(texturedModel, shader)
         Window.updateAll()
     }
 
-    rawModel.close()
+    texturedModel.close()
+    shader.close()
 }

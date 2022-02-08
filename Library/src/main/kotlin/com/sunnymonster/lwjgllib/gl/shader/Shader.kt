@@ -24,18 +24,33 @@ open class Shader(vertexShaderPath : String, fragmentShaderPath : String) : Auto
         val vertexCode : String = vertexCodeStream!!.bufferedReader().use { it.readText() }
         val fragmentCode : String = fragmentCodeStream!!.bufferedReader().use { it.readText() }
 
+        val success : IntArray = IntArray(1)
+
         val vertexShader : Int = glCreateShader(GL_VERTEX_SHADER)
         glShaderSource(vertexShader, vertexCode)
         glCompileShader(vertexShader)
+        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, success)
+        if (success[0] != GL_TRUE)
+        {
+            System.err.println(glGetShaderInfoLog(vertexShader))
+        }
 
         val fragmentShader : Int = glCreateShader(GL_FRAGMENT_SHADER)
         glShaderSource(fragmentShader, fragmentCode)
         glCompileShader(fragmentShader)
+        glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, success)
+        if (success[0] != GL_TRUE) {
+            System.err.println(glGetShaderInfoLog(fragmentShader))
+        }
 
         id = glCreateProgram()
         glAttachShader(id, vertexShader)
         glAttachShader(id, fragmentShader)
         glLinkProgram(id)
+        glGetProgramiv(id, GL_LINK_STATUS, success)
+        if (success[0] != GL_TRUE) {
+            System.err.println(glGetProgramInfoLog(id))
+        }
 
         glDeleteShader(vertexShader)
         glDeleteShader(fragmentShader)

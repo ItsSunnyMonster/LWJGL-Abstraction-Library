@@ -83,7 +83,7 @@ class Window
                     else -> "UNKNOWN"
                 }
 
-                println(String.format("%d: %s of %s severity, raised from %s: %s\n",
+                System.err.println(String.format("%d: %s of %s severity, raised from %s: %s\n",
                     id, type, severity, source, GLDebugMessageCallback.getMessage(length, message)))
             }
         }, NULL)
