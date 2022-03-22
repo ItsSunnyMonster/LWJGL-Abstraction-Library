@@ -4,7 +4,7 @@ plugins {
     id 'application'
 }
 
-group = 'com.sunnymonster'
+group = 'io.github.itssunnymonster'
 version = '1.0.0'
 
 dependencies {
@@ -20,5 +20,5 @@ compileTestKotlin {
 }
 
 application {
-    mainClass.set('com.sunnymonster.lwjgllib.tester.MainKt')
+    mainClass.set('io.github.itssunnymonster.lwjgllib.tester.MainKt')
 }
